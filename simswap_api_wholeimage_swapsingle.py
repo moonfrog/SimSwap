@@ -1,3 +1,11 @@
+import sys
+import os
+
+current_dir = os.path.abspath(os.path.dirname(__file__))
+root_dir = os.path.abspath(os.path.join(current_dir, '..', '..',))
+sys.path.insert(0, current_dir)
+
+
 import cv2
 import torch
 import fractions
