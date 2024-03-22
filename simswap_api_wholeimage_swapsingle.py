@@ -35,11 +35,12 @@ def swap_face(img_a_whole, img_b_whole):
  start_time = time.time()
  with torch.no_grad():
         opt = TestOptions().parse()
+        face_detect_start_time = time.time()
         img_a_align_crop, _ = app.get(img_a_whole,crop_size)
         img_a_align_crop_pil = Image.fromarray(cv2.cvtColor(img_a_align_crop[0],cv2.COLOR_BGR2RGB)) 
         img_a = transformer_Arcface(img_a_align_crop_pil)
         img_id = img_a.view(-1, img_a.shape[0], img_a.shape[1], img_a.shape[2])
-
+        print("imgA face detect time: ", time.time() - face_detect_start_time)
         # convert numpy to tensor
         img_id = img_id.cuda()
 
@@ -50,8 +51,9 @@ def swap_face(img_a_whole, img_b_whole):
 
 
         ############## Forward Pass ######################
-
+        face_detect_start_time = time.time()
         img_b_align_crop_list, b_mat_list = app.get(img_b_whole,crop_size)
+        print("imgB face detect time: ", time.time() - face_detect_start_time)
         # detect_results = None
         swap_result_list = []
 
