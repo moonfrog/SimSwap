@@ -5,14 +5,14 @@ import numpy as np
 from PIL import Image
 import torch.nn.functional as F
 from torchvision import transforms
-from models.models import create_model
-from options.test_api_options import TestOptions
-from insightface_func.face_detect_crop_single import Face_detect_crop
-from util.reverse2original import reverse2wholeimage
+from .models.models import create_model
+from .options.test_api_options import TestOptions
+from .insightface_func.face_detect_crop_single import Face_detect_crop
+from .util.reverse2original import reverse2wholeimage
 import os
-from util.add_watermark import watermark_image
-from util.norm import SpecificNorm
-from parsing_model.model import BiSeNet
+from .util.add_watermark import watermark_image
+from .util.norm import SpecificNorm
+from .parsing_model.model import BiSeNet
 import time
 def print_info():
     print("he;llo")
