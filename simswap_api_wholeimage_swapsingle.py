@@ -75,7 +75,7 @@ def swap_face(img_a_whole, img_b_whole):
         else:
             net =None
         spNorm =SpecificNorm()
-        logoclass = watermark_image('./simswaplogo/simswaplogo.png')
+        # logoclass = watermark_image('./simswaplogo/simswaplogo.png')
         base64_image = reverse2wholeimage(b_align_crop_tenor_list, swap_result_list, b_mat_list, crop_size, img_b_whole, logoclass, \
             os.path.join(opt.output_path, 'result_whole_swapsingle.jpg'), opt.no_simswaplogo,pasring_model =net,use_mask=opt.use_mask, norm = spNorm)
         print('Execution time: ', time.time() - start_time)
