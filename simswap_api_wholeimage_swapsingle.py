@@ -22,8 +22,19 @@ from util.add_watermark import watermark_image
 from util.norm import SpecificNorm
 from parsing_model.model import BiSeNet
 import time
-def print_info():
-    print("he;llo")
+
+def print_cuda_info():
+    if torch.cuda.is_available():
+        print("CUDA is available. Found {} CUDA device(s).".format(torch.cuda.device_count()))
+        for i in range(torch.cuda.device_count()):
+            device = torch.cuda.get_device_name(i)
+            capability = torch.cuda.get_device_capability(i)
+            print("CUDA Device {}: {}".format(i, device))
+            print("   Compute Capability: {}.{}".format(capability[0], capability[1]))
+            print("   CUDA Cores: {}".format(torch.cuda.get_device_properties(i).multi_processor_count))
+    else:
+        print("CUDA is not available on this system.")
+
 def lcm(a, b): return abs(a * b) / fractions.gcd(a, b) if a and b else 0
 
 transformer_Arcface = transforms.Compose([
@@ -121,3 +132,4 @@ def initModel():
     global app
     app = Face_detect_crop(name='antelope', root='./insightface_func/models')
     app.prepare(ctx_id= 0, det_thresh=0.6, det_size=(640,640),mode=mode)
+    print_cuda_info()
